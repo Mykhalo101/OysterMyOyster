@@ -1,18 +1,13 @@
 //=============================================================================
 // Breakout
 //=============================================================================
-var oysterImage = new Image();
-oysterImage.src = 'oscar.png';
-var oysterBrick = new Image();
-oysterBrick.src = 'puffs.png';
-var bg = new Image();
-bg.src = 'bg.png';
-// oysterImage.onload = function() {
-
-//         ctx.drawImage(imageObj, this.x+500, this.y);
-//       };
-      
-
+//document.body.style.backgroundColor = "http://img4.wikia.nocookie.net/__cb20120825141815/naruto/images/6/6b/Konoha.jpg";
+var oscar = new Image();
+oscar.src = 'oscar.png';
+var oysters = new Image();
+oysters.src = 'golden.png';
+var background = new Image();
+backgroundg.src = 'bg.png';
 
 Breakout = {
 
@@ -29,17 +24,18 @@ Breakout = {
     },
 
     court: {
+
       xchunks: 30,
       ychunks: 25
     },
 
     ball: {
-      radius:  0.4,
+      radius:  0.3,
       speed:   15,
       labels: {
-        3: { text: 'READY', fill: 'white', font: 'bold 28pt helvetica' },
-        2: { text: 'SET',   fill: 'white', font: 'bold 28pt helvetica' },
-        1: { text: 'GO!',   fill: 'white', font: 'bold 28pt helvetica' }
+        3: { text: 'ready...', fill: '#D82800', stroke: 'black', font: 'bold 28pt arial' },
+        2: { text: 'set..',    fill: '#FC9838', stroke: 'black', font: 'bold 28pt arial' },
+        1: { text: 'go!',      fill: '#80D010', stroke: 'black', font: 'bold 28pt arial' }
       }
     },
 
@@ -50,14 +46,15 @@ Breakout = {
     },
 
     color: {
-      background: 'rgba(000, 000, 000, 0.001)',
-      foreground: 'white',
-      border:     'white',
-      wall:       'white',
-      ball:       'white',
-      paddle:     'white',
-      score:      "#80a9c3",
-      highscore:  "#80a9c3"
+
+      background: 'rgba(200, 200, 200, 0.5)',
+      foreground: 'green',
+      border:     '#222',
+      wall:       '#333',
+      ball:       'black',
+      paddle:     'red',//'rgb(245,111,37)',
+      score:      "#EFD279",
+      highscore:  "#AFD775"
     },
 
     state: {
@@ -81,7 +78,7 @@ Breakout = {
     ],
 
     sounds: {
-      brick:    '/sound/breakout/brick.mp3',
+      brick:    '/sound/breakout/brick.mp3',              //HOW DO I MAKE THIS WORK?!
       paddle:   '/sound/breakout/paddle.mp3',
       go:       '/sound/breakout/go.mp3',
       levelup:  '/sound/breakout/levelup.mp3',
@@ -144,6 +141,8 @@ Breakout = {
     this.ball.draw(ctx);
     this.score.draw(ctx);
     ctx.restore();
+         // ctx.drawImage(oscar, this.x+25, this.y-45);
+
   },
 
   onresize: function(width, height) {
@@ -282,8 +281,8 @@ Breakout = {
       this.top    = this.game.court.top - this.game.court.wall.size*2;
       this.width  = this.game.court.width;
       this.height = this.game.court.wall.size*2;
-      this.scorefont = "bold " + Math.max(9, this.game.court.wall.size - 2) + "pt helvetica";
-      this.highfont  = ""      + Math.max(9, this.game.court.wall.size - 8) + "pt helvetica";
+      this.scorefont = "bold " + Math.max(9, this.game.court.wall.size - 2) + "pt arial";
+      this.highfont  = ""      + Math.max(9, this.game.court.wall.size - 8) + "pt arial";
       ctx.save();
       ctx.font = this.scorefont;
       this.scorewidth = ctx.measureText(this.format(0)).width;
@@ -403,23 +402,31 @@ Breakout = {
     draw: function(ctx) {
     ctx.drawImage(bg, 0, 0)
 
-     var n, brick;
-     for(n = 0 ; n < this.numbricks ; n++) {
+    //   if (this.rerender) {
+    //     this.canvas = Game.renderToCanvas(this.game.width, this.game.height, this.render.bind(this), this.canvas);
+    //     this.rerender = false;
+    //   }
+    //   ctx.drawImage(this.canvas, 0, 0);
+    // },
+
+    // render: function(ctx) {
+    // ctx.drawImage(background, 0, 0)
+
+      var n, brick;
+for(n = 0 ; n < this.numbricks ; n++) {
         brick = this.bricks[n];
 
         if (!brick.hit) {
-        ctx.drawImage(oysterBrick, brick.x, brick.y);
+        ctx.drawImage(oysters, brick.x, brick.y);
 
         }
-      }
-    },
+      render: function(ctx) {
+          var n, brick;
 
-    render: function(ctx) {
-      var n, brick;
-
-      ctx.translate(0.50, 0.5); // crisp 1px lines for the brick borders
+      ctx.translate(0.5, 0.5); // crisp 1px lines for the brick borders
       ctx.strokeStyle = this.game.color.border;
-      ctx.lineWidth = 0;
+      ctx.lineWidth = 1;
+      
       for(n = 0 ; n < this.numbricks ; n++) {
         brick = this.bricks[n];
         if (!brick.hit) {
@@ -428,22 +435,22 @@ Breakout = {
           ctx.strokeRect(brick.x, brick.y, brick.w, brick.h);
         }
       }
-
-      // ctx.fillStyle = this.game.color.wall;
-      // ctx.lineWidth = 2;
-      // ctx.beginPath();
-      // ctx.moveTo(this.wall.top.left,     this.wall.top.top);
-      // ctx.lineTo(this.wall.top.right,    this.wall.top.top);
-      // ctx.lineTo(this.wall.top.right,    this.wall.right.bottom);
-      // ctx.lineTo(this.wall.right.left,   this.wall.right.bottom);
-      // ctx.lineTo(this.wall.right.left,   this.wall.top.bottom);
-      // ctx.lineTo(this.wall.left.right,   this.wall.top.bottom);
-      // ctx.lineTo(this.wall.left.right,   this.wall.left.bottom);
-      // ctx.lineTo(this.wall.left.left,    this.wall.left.bottom);
-      // ctx.lineTo(this.wall.top.left,     this.wall.top.top);
-      // ctx.fill();
-      // ctx.stroke();
-      // ctx.closePath();
+/*
+      ctx.fillStyle = this.game.color.wall;
+      ctx.lineWidth = 2;
+      ctx.beginPath();
+      ctx.moveTo(this.wall.top.left,     this.wall.top.top);
+      ctx.lineTo(this.wall.top.right,    this.wall.top.top);
+      ctx.lineTo(this.wall.top.right,    this.wall.right.bottom);
+      ctx.lineTo(this.wall.right.left,   this.wall.right.bottom);
+      ctx.lineTo(this.wall.right.left,   this.wall.top.bottom);
+      ctx.lineTo(this.wall.left.right,   this.wall.top.bottom);
+      ctx.lineTo(this.wall.left.right,   this.wall.left.bottom);
+      ctx.lineTo(this.wall.left.left,    this.wall.left.bottom);
+      ctx.lineTo(this.wall.top.left,     this.wall.top.top);
+      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();*/
     },
 
     remove: function(brick) {
@@ -670,54 +677,38 @@ Breakout = {
     },
 
     draw: function(ctx) {
-
-
       if (this.rerender) {
-
+        //this.canvas = Game.renderToCanvas(this.w, this.h, this.render.bind(this));
+        //this.rerender = false;
       }
-
-      ctx.drawImage(oysterImage, this.x+25, this.y-45);
-
-      //   var imageObj = new Image();
-
-      // imageObj.onload = function() {
-
-      //   ctx.drawImage(imageObj, this.x+500, this.y);
-      // };
-      // imageObj.src = 'oscar.png';
-
-      // console.log(this.x)
-
-      //   this.canvas = Game.renderToCanvas(this.w, this.h, this.render.bind(this));
-      //   this.rerender = false;
-      // }
-      // ctx.drawImage(this.canvas, this.x, this.y);
+  ctx.drawImage(oscar, this.x+25, this.y-45);
+//ctx.drawImage(this.canvas, this.x, this.y);
     },
 
     render: function(ctx) {
- 
-      //var gradient = ctx.createLinearGradient(0, this.h, 0, 0);
-      // //gradient.addColorStop(0.36, 'rgb(245,111,37)');
-      // //gradient.addColorStop(0.68, 'rgb(255,145,63)');
-      // gradient.addColorStop(0.84, 'rgb(255,174,95)');
 
-      // var r = this.h/2;
+      /*var gradient = ctx.createLinearGradient(0, this.h, 0, 0);
+      gradient.addColorStop(0.36, 'rgb(245,111,37)');
+      gradient.addColorStop(0.68, 'rgb(255,145,63)');
+      gradient.addColorStop(0.84, 'rgb(255,174,95)');
 
-      // ctx.fillStyle = gradient;
-      // ctx.strokeStyle = this.game.color.border;
-      // ctx.beginPath();
-      // ctx.moveTo(r,  0);
-      // ctx.lineTo(this.w - r, 0);
-      // ctx.arcTo(this.w, 0, this.w, r, r);
-      // ctx.lineTo(this.w, this.h - r);
-      // ctx.arcTo(this.w, this.h, this.w - r, this.h, r);
-      // ctx.lineTo(r, this.h);
-      // ctx.arcTo(0, this.h, 0, this.h - r, r);
-      // ctx.lineTo(0, r);
-      // ctx.arcTo(0, 0, r, 0, r);
-      // ctx.fill();
-      // ctx.stroke();
-      // ctx.closePath();
+      var r = this.h/2;
+
+      ctx.fillStyle = gradient;
+      ctx.strokeStyle = this.game.color.border;
+      ctx.beginPath();
+      ctx.moveTo(r,  0);
+      ctx.lineTo(this.w - r, 0);
+      ctx.arcTo(this.w, 0, this.w, r, r);
+      ctx.lineTo(this.w, this.h - r);
+      ctx.arcTo(this.w, this.h, this.w - r, this.h, r);
+      ctx.lineTo(r, this.h);
+      ctx.arcTo(0, this.h, 0, this.h - r, r);
+      ctx.lineTo(0, r);
+      ctx.arcTo(0, 0, r, 0, r);
+      ctx.fill();
+      ctx.stroke();
+      ctx.closePath();*/
 
     },
 
