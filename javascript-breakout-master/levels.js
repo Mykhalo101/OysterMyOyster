@@ -1,5 +1,34 @@
 Breakout.Colors = {
 
+  pastel: {
+    y: "grey",
+    p: "grey", 
+    b: "grey", 
+    g: "gold", 
+    o: "grey"  
+  },
+};
+
+Breakout.Levels = [
+  { colors: Breakout.Colors.pastel,
+    bricks: [
+      "oooooooooooooooooooooooooooooo",   // row 1
+      "                              ",   // row 2
+      "                              ",   // row 3
+      "ooooooo o o ogoogo o o ooooooo",   // row 4
+      "                              ",   // row 5
+      "                              ",   // row 6
+      "ooo  oo  oooooooooooo  oo  ooo",   // row 7
+      "                              ",   // row 8
+      "                              ",   // row 9
+      "oo  o  o  o        o  o  o  oo",   // row 10 
+      "                              ",   // row 11
+      "                              ",   // row 12
+      "ooooooo  o          o  ooooooo",   // row 13
+    ]
+  },
+];
+
   // arkanoid: {
   //   w: "#FCFCFC", // white
   //   o: "#FC7460", // orange
@@ -13,13 +42,13 @@ Breakout.Colors = {
   //   d: "#F0BC3C"  // gold
   // },
 
-  pastel: {
-    y: "#FFF7A5", // yellow
-    p: "#FFA5E0", // pink
-    b: "#A5B3FF", // blue
-    g: "#BFFFA5", // green
-    o: "#FFCBA5"  // orange
-  },
+  // pastel: {
+  //   y: "#FFF7A5", // yellow
+  //   p: "#FFA5E0", // pink
+  //   b: "#A5B3FF", // blue
+  //   g: "#BFFFA5", // green
+  //   o: "#FFCBA5"  // orange
+  // },
 
   // vintage: {
   //   a: "#EFD279", // yellow
@@ -51,20 +80,20 @@ Breakout.Colors = {
   // },
 
 
-};
+// };
 
-Breakout.Levels = [
+// Breakout.Levels = [
 
-  { colors: Breakout.Colors.pastel,
-    bricks: [
-      "", "", "", "", "", "",
-      "yyyyyYYYYY           yyyyyYYYYY",
-      "pppppPPP            pppppPPPPP",
-      "bbbbbBBBB            BbbbbbBBBBB",
-      "gggggGGGG             gggggGGGGG",
-      "oooooOOOO            ooooOOOOO"
-    ]
-  },
+//   { colors: Breakout.Colors.pastel,
+//     bricks: [
+//       "", "", "", "", "", "",
+//       "yyyyyYYYYY           yyyyyYYYYY",
+//       "pppppPPP            pppppPPPPP",
+//       "bbbbbBBBB            BbbbbbBBBBB",
+//       "gggggGGGG             gggggGGGGG",
+//       "oooooOOOO            ooooOOOOO"
+//     ]
+  //},
 /*  { colors: Breakout.Colors.arkanoid,
     bricks: [
       "", "",
@@ -272,6 +301,5 @@ Breakout.Levels = [
   }
 */
 
-];
 
 
