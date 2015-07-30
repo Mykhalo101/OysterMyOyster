@@ -1,70 +1,41 @@
-<!DOCTYPE html> 
 <html>
 <head>
-  
-    <embed 
-<embed src="music/SubwaySurfer.mp3" autostart="true" loop="true"
+	<embed 
+<embed src="music/300s.mp3" autostart="true" loop="true"
 width="2" height="0">
 </embed>
+	<link type="text/css" rel="stylesheet" href="index.css" />
+<title>Main Game</title>
+</head>
+<body>
+	
+	<div id="background">
+		<a href="Picture1.html" ><img id="button1" src="INFO.png">
+		<a href="oystergame.html" ><img id= "button2"src="PLAY.png"></a>
+		<a href="donations.html" ><img id="button3" src="DONATE.png"></a>
+	</div>
+
+	
+	<!-- <div id="button1">
+		
+	</div>
+	<div id="button2">
+		
+	</div> -->
 
 
- 
+	
+</body>
 
-
-
-  <title>OMO</title>
-
-
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-  <meta name="viewport" content="width=device-width", initial-scale=1.0, user-scalable="no"/>
-  <link href="breakout.css" media="screen, print" rel="stylesheet" type="text/css" /> 
-</head> 
- 
-<body> 
-
-
-  <div id="breakout">
- 
-
-    <canvas id="canvas">
-    </canvas>
-
-
-    <div id="levels">
-      <img id="next" class="disabled" src="images/up.png"   title="next level">
-      <img id="prev" class="disabled" src="images/down.png" title="previous level">
-      <span id="label">level:</span><span id="level"></span>
-    </div>
-
-
-    <div id="controls">
-      <input id='sound' type='checkbox' />
-      <label for='sound'>sound</label>
-    </div>
-
-
-    <div id="instructions" style='display:none;'>
-      <div class='keyboard'>
-        <b>SPACE</b>: START<br>
-        <b>LEFT/RIGHT</b>: MOVE<br>
-      </div>
-
-
-    </div>
-  </div>
-
-
-
-
-
-  <script src="game.js"></script>
-  <script src="breakout.js"></script>
-  <script src="levels.js"></script>
-  <script>
-
-  Game.ready(function() {
-    var game = Game.start('canvas', Breakout);
-  });
-  </script>
-</body> 
 </html>
+
+
+<!--
+	<img src="pic_mountain.jpg" alt="Mountain View" 
+	style="width:304px;height:228px;">
+
+	img src="pic_mountain.jpg" alt="Mountain View" 
+	style="width:304px;height:228px;">
+
+	img src="pic_mountain.jpg" alt="Mountain View" 
+	style="width:304px;height:228px;">-->
